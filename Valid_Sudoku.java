@@ -6,7 +6,7 @@ class Solution {
                     return false;
                 }
         
-        return board_valid(board, 0, 0);
+        return board_valid(board);
     }
     
     public static boolean box_valid(char[][] board, int topI, int topJ){
@@ -24,10 +24,10 @@ class Solution {
             }
         }
         return true;
-        
+         
     }
     
-    public static boolean board_valid(char[][] board, int topI, int topJ){
+    public static boolean board_valid(char[][] board){
         Map<Integer, Set<Integer>> row_mapper = new HashMap();
         Map<Integer, Set<Integer>> col_mapper = new HashMap();
         
@@ -39,24 +39,20 @@ class Solution {
             col_mapper.put(i, cols);
         }
         
-        for (int i = topI; i < topI + 3; i++){
-            for (int j = topJ; j < topJ + 3 ; j++){
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9 ; j++){
                 if (board[i][j] == '.') continue;
-                
-                
+   
                 Integer v = board[i][j] - '0';
-                
                 //If the row contains already the same number
                 //return invalid
                 if (row_mapper.get(i).contains(v)) {
-                    System.out.println("Row " + i + " contains already " + v);
                     return false;
                 } else {
                     row_mapper.get(i).add(v);
                 }
                 
                 if (col_mapper.get(j).contains(v)) {
-                    System.out.println("Col " + i + " contains already " + v);
                     return false;
                 } else {
                     col_mapper.get(j).add(v);
